@@ -14,12 +14,37 @@
 <body onLoad="initialise()">
 
 
+<!--basis for mapping left and right click options to the canvas in the future-->
+<button id="button" onclick="myFunction()" oncontextmenu="second()">Click Me!!!
+</button>
+
 <h1>
     Minesweeper
 </h1>
+
+
 <canvas id="myCanvas" width="495" height="495"
-        style="border:3px solid #000000;">
+        style="border:50px solid #000000;">
 </canvas>
+
+
+<script>
+function myFunction() {
+    document.getElementById("button").innerHTML = "you left clicked";
+}
+
+function second() {
+    event.preventDefault();
+    document.getElementById("button").innerHTML= "you right clicked";
+}
+
+
+
+
+</script>
+
+
+
 
 
 </body>

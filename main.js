@@ -100,7 +100,7 @@ function MineMap(size, mines) {
 
 function main()
 {
-    let map = MineMap(10, 40);
+    let map = MineMap(15, 40);
 }
 
 main();
@@ -116,13 +116,13 @@ function initialise() {
         xCoord = 0;
         for (let x = 0; x < 16; x++) {
 
-            grd = ctx.createLinearGradient(0, 0, 500, 500);
-            grd.addColorStop(0, "#33daff");
-            grd.addColorStop(1, "#2f40ff");
+            grd = ctx.createLinearGradient(0, 0, 500, 0);
+            grd.addColorStop(0, "#ff8e47");
+            grd.addColorStop(1, "#FF0000");
 
             ctx.fillStyle = grd;
             ctx.fillRect(xCoord, yCoord, boxSize, boxSize);
-
+4
 
 
             xCoord += boxSize + 1;

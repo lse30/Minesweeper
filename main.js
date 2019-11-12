@@ -93,13 +93,42 @@ function MineMap(size, mines) {
     //console.log(map)
 
 
-    let finalmap = addNums(map);
-    console.log(finalmap)
+    map = addNums(map);
+    console.log(map);
+    return map;
 }
 
 function main()
 {
-    MineMap(15, 40);
+    let map = MineMap(10, 40);
 }
 
 main();
+
+function initialise() {
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var grd;
+
+    let boxSize = 30;
+    yCoord = 0;
+    for (let y = 0; y < 16; y++) {
+        xCoord = 0;
+        for (let x = 0; x < 16; x++) {
+
+            grd = ctx.createLinearGradient(0, 0, 500, 500);
+            grd.addColorStop(0, "#33daff");
+            grd.addColorStop(1, "#2f40ff");
+
+            ctx.fillStyle = grd;
+            ctx.fillRect(xCoord, yCoord, boxSize, boxSize);
+
+
+
+            xCoord += boxSize + 1;
+
+        }
+
+        yCoord += boxSize + 1;
+    }
+}

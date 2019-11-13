@@ -15,7 +15,8 @@
 
 
 <!--basis for mapping left and right click options to the canvas in the future-->
-<button id="button" onclick="myFunction()" oncontextmenu="second()">Click Me!!!
+<button id="button" onclick="initialise()">
+    Reset
 </button>
 
 <h1>
@@ -24,24 +25,11 @@
 
 
 <canvas id="myCanvas" width="495" height="495"
-        style="border:50px solid #000000;">
+        onclick="leftClick()"
+        oncontextmenu="rightClick()"
+        style="border:3px solid #000000;">
 </canvas>
 
-
-<script>
-function myFunction() {
-    document.getElementById("button").innerHTML = "you left clicked";
-}
-
-function second() {
-    event.preventDefault();
-    document.getElementById("button").innerHTML= "you right clicked";
-}
-
-
-
-
-</script>
 
 
 

@@ -1,3 +1,8 @@
+function Minesweeper(size, mines) {
+    this.size = size;
+    this.mines = mines;
+    this.map = MineMap(16,40);
+}
 
 function mapInit(size) {
     let map = [];
@@ -11,8 +16,6 @@ function mapInit(size) {
     }
     return map;
 }
-
-
 
 function addNums(map) {
     //adds numbers to the board based on surrounding mines
@@ -90,20 +93,10 @@ function MineMap(size, mines) {
         let y = mineLocations[i] % size;
         map[x][y] = 'M';
     }
-    //console.log(map)
 
 
-    map = addNums(map);
-    console.log(map);
-    return map;
+    return addNums(map);
 }
-
-function main()
-{
-    let map = MineMap(15, 40);
-}
-
-main();
 
 function initialise() {
     var canvas = document.getElementById("myCanvas");
@@ -122,7 +115,7 @@ function initialise() {
 
             ctx.fillStyle = grd;
             ctx.fillRect(xCoord, yCoord, boxSize, boxSize);
-4
+            4
 
 
             xCoord += boxSize + 1;
@@ -131,4 +124,65 @@ function initialise() {
 
         yCoord += boxSize + 1;
     }
+    this.map = MineMap(16,40);
 }
+
+
+function leftClick() {
+    let x = event.pageX - document.getElementById('myCanvas').offsetLeft;
+    let y = event.pageY - document.getElementById('myCanvas').offsetTop;
+    let position = pixelToBox(x, y);
+    uncover(position);
+}
+
+function rightClick() {
+    event.preventDefault();
+    let x = event.pageX - document.getElementById('myCanvas').offsetLeft;
+    let y = event.pageY - document.getElementById('myCanvas').offsetTop;
+    let position = pixelToBox(x, y);
+    flag(position);
+
+}
+
+function flag(position) {
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "#000000";
+    ctx.fillText("F", (position[0] * 31) + 5, ((position[1] + 1) * 31) - 4);
+}
+
+function pixelToBox(x, y) {
+    let boxSize = 30;
+    let boxX = Math.floor(x / (boxSize+1));
+    let boxY = Math.floor(y / (boxSize+1));
+
+    const position =  [boxX, boxY];
+    return position;
+}
+
+function uncover(position) {
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(position[0]*31, position[1]*31, 30, 30);
+    ctx.font = "30px Arial";
+    let boxStatus = minesweeper.map[position[0]][position[1]];
+
+    if (boxStatus !== '_') {
+        if (boxStatus === 'M') {
+            ctx.strokeText(boxStatus, (position[0] * 31) + 1, ((position[1] + 1) * 31) - 4);
+        } else {
+            ctx.strokeText(boxStatus, (position[0] * 31) + 5, ((position[1] + 1) * 31) - 4);
+        }
+    }
+
+}
+
+
+
+
+let minesweeper = new Minesweeper(16,40);
+
+
+

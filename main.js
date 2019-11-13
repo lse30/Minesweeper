@@ -1,8 +1,10 @@
 function Minesweeper(size, mines) {
     this.size = size;
     this.mines = mines;
-    this.map = MineMap(16,40);
+    this.map = MineMap(size,mines);
 }
+
+let minesweeper = new Minesweeper(16,40);
 
 function mapInit(size) {
     let map = [];
@@ -102,6 +104,9 @@ function initialise() {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     var grd;
+    ctx.fillStyle = "#ff9634";
+    ctx.fillRect(0, 0, 495, 495);
+
 
     let boxSize = 30;
     yCoord = 0;
@@ -110,8 +115,8 @@ function initialise() {
         for (let x = 0; x < 16; x++) {
 
             grd = ctx.createLinearGradient(0, 0, 500, 0);
-            grd.addColorStop(0, "#ff8e47");
-            grd.addColorStop(1, "#FF0000");
+            grd.addColorStop(0, "#40fffd");
+            grd.addColorStop(1, "#3A60e8");
 
             ctx.fillStyle = grd;
             ctx.fillRect(xCoord, yCoord, boxSize, boxSize);
@@ -124,7 +129,9 @@ function initialise() {
 
         yCoord += boxSize + 1;
     }
-    this.map = MineMap(16,40);
+
+    minesweeper.map = MineMap(minesweeper.size, minesweeper.mines)
+
 }
 
 
@@ -178,11 +185,5 @@ function uncover(position) {
     }
 
 }
-
-
-
-
-let minesweeper = new Minesweeper(16,40);
-
 
 
